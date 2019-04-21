@@ -3,20 +3,25 @@ const app = express();
 const PORT = 5000;
 
 let users= {
-    Amit: true,
-    Bao: true
+    Apple: true,
+    Banana: true
   };
 
 let messages = [
     {
-      sender: 'Amit',
+      sender: 'Apple',
       timestamp: new Date(),
-      text: "I am really enjoying React!"
+      text: "choose the red one, really red one!!"
     },
     {
-      sender: 'Bao',
+      sender: 'banana',
       timestamp: new Date(),
-      text: "Me too!"
+      text: "peel them first, then eat"
+    },
+    {
+      sender: 'hotPot',
+      timestamp: new Date(),
+      text: "Heat up the pot, and then put meat in it!"
     }
   ];
   let isLoggedIn = false;

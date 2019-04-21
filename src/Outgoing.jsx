@@ -15,6 +15,11 @@ class Outgoing extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.resetInput = this.resetInput.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.props.click();
   }
 
   handleChange(event) {
@@ -65,7 +70,7 @@ class Outgoing extends React.Component {
       <form onSubmit={this.handleSubmit}>
         <label>
           New Message :
-          <input type="text" value={this.state.value} onChange={this.handleChange} placeholder="Enter message to send" />
+          <input type="text" value={this.state.value} onChange={this.handleChange} onClick={this.handleClick} placeholder="Enter message to send" />
           <button id="xxx" className="login-button" disabled={this.state.buttonShow} type="submit">Submit</button>
         </label>
       </form>

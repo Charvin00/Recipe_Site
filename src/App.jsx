@@ -26,7 +26,9 @@ class App extends Component {
     this.logUser = this.logUser.bind(this);
   };
   
-
+  myClick = () => {
+    alert('hello world')
+  }
   updateMessage = () => {
     getMessage().then( result => {
       // console.log(result);
@@ -77,10 +79,11 @@ class App extends Component {
       
       return (
         <div className="chat-app">
+          <h1 className="header">Shen's Bread</h1>
           <div className="display-panel">
             <Users users={this.state.users}/>
-            <Messages messages={this.state.messages} curUser={this.state.curUser} />
-            <Outgoing send={this.sendMessage} />
+            <Messages messages={this.state.messages} curUser={this.state.curUser}  />
+            <Outgoing send={this.sendMessage} click={this.myClick}/>
           </div>
           <ErrorMessage error = {this.state.error}/>
         </div>
