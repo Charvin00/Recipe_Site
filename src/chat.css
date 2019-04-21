@@ -1,0 +1,105 @@
+body {
+  font-family: chalkduster;
+  margin: 5%;
+  /* position: center; */
+}
+div.sender-info img {
+  border-radius: 50%;
+  width: 10%;
+  height: auto;
+  box-shadow: 2px 4px 6px rgba(0, 0, 0, .5);
+}
+
+
+.display-panel {
+  display: grid;
+  grid-template-columns: 20% 80%;
+  
+}
+
+/* why not responsive?? */
+.users {
+  margin: 0;
+  background-color: orange;
+  color: white;
+  /* padding-left: 50%; */
+  font-size: 150%;
+}
+
+.messages {
+  height: 350px;
+  overflow: scroll;
+  display: grid;
+  grid-row-gap: auto;
+  padding-top: 2%;
+  background-color: #F4F5F7;
+  list-style-type: none;
+  padding: 5%;
+  margin: 0;  
+}
+.meta-info  {
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
+p.message-text {
+  background-color: rgba(255, 81, 0, 0.678);
+  padding: 2%;
+  color: white;
+  border-radius: 15px;
+  width: fit-content;
+
+}
+.meta-info {
+  display: grid;
+  grid-template-columns: 70% 30%;
+  grid-column-gap: 2px;
+}
+span.timestamp {
+  color: #D8DADF;
+  font-family: calibri;
+}
+ol > li:nth-child(odd) > div > p {
+  background-color: #9DC0E9;
+}
+
+.outgoing {
+  margin-left: 20%;
+  padding-left: 4%;
+  padding-right: 4%;
+  margin-top: 0;
+}
+form {
+  display: grid;
+  grid-template-columns: 90% 8%;
+  grid-column-gap: 1%;
+}
+input{
+  font: chalkduster;
+  border-radius: 0;
+  border: none;
+  border-bottom: 2px solid orange;
+  height: 30px;
+}
+button{
+  font-family: chalkduster;
+  border-radius: 100px;
+  border:2px solid orange;
+}
+
+@media screen and (max-width: 550px) {
+  .display-panel{
+      display: inline;
+  }
+  .users {
+      /* list-style-type: circle; */
+      display: grid;
+      grid-template-columns:50% 50%;
+  }
+
+  div.outgoing{
+      padding: 0;
+      widows: 100%;
+      margin: 0;
+  }
+  
+}
