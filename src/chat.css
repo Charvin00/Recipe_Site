@@ -1,6 +1,14 @@
+.header {
+  color: orange;
+  align-content: center;
+  text-align: center;
+  font-size: 30px;
+  font-weight: normal;
+  padding-top: 2%;
+}
 body {
   font-family: chalkduster;
-  margin: 5%;
+  /* margin: 5%; */
   /* position: center; */
 }
 div.sender-info img {
@@ -14,7 +22,7 @@ div.sender-info img {
 .display-panel {
   display: grid;
   grid-template-columns: 20% 80%;
-  
+  padding-top: 2%;
 }
 
 /* why not responsive?? */
@@ -26,6 +34,11 @@ div.sender-info img {
   font-size: 150%;
 }
 
+.spinner { 
+  width: 21%;
+  height: auto;
+  margin-left: 40%;
+}
 .messages {
   height: 350px;
   overflow: scroll;
@@ -47,7 +60,7 @@ p.message-text {
   color: white;
   border-radius: 15px;
   width: fit-content;
-
+  cursor: pointer;
 }
 .meta-info {
   display: grid;
@@ -66,12 +79,18 @@ ol > li:nth-child(odd) > div > p {
   margin-left: 20%;
   padding-left: 4%;
   padding-right: 4%;
-  margin-top: 0;
+  margin-top: 1%;
 }
+.outgoing-input {
+  display: grid;
+  grid-template-columns: 20% 80%;
+  margin-left: -26%;
+}
+
 form {
   display: grid;
-  grid-template-columns: 90% 8%;
-  grid-column-gap: 1%;
+  grid-template-rows: 50% 50%;
+  grid-row-gap: 71%;
 }
 input{
   font: chalkduster;
@@ -79,12 +98,34 @@ input{
   border: none;
   border-bottom: 2px solid orange;
   height: 30px;
+  text-align: center;
 }
 button{
   font-family: chalkduster;
   border-radius: 100px;
   border:2px solid orange;
+  margin-left: 40%;
+  margin-right: 40%;
+  cursor: pointer;
 }
+
+/*======== login page=========== */
+.login {
+  margin: 5%;
+  margin-top: 15%;
+}
+.login-header {
+  color: orange;
+  align-content: center;
+  text-align: center;
+  font-size: 30px;
+  font-weight: normal;
+}
+.login-form {
+  padding-top: 70px;
+}
+
+/* ====== for smartphone========= */
 
 @media screen and (max-width: 550px) {
   .display-panel{
