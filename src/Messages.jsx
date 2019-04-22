@@ -36,10 +36,12 @@ class Messages extends React.Component {
       </li>
     ));
     return (
-      // how to solve unique keys???
-      <ol className="messages">
-        {messageList}
-      </ol>
+      <div display-message>
+        <ol className="messages">
+          {messageList}
+        </ol>
+      </div>
+      
     );
   
   }

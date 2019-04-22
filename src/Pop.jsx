@@ -24,7 +24,7 @@ class Pop extends React.Component {
               <span className="timestamp">{this.props.message.timestamp.toString()}</span>
             </div>
           </div>
-          <p className="message-text" onClick={this.handleClick}>{this.props.message.text}</p>
+          <p className="message-text">{this.props.message.text}</p>
           <button onClick={this.handleClick}>Go Back</button>
         </div>
         );

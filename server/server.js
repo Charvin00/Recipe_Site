@@ -42,10 +42,11 @@ app.post('/post-message', express.json(), (req, res) =>  {
   else {
     message.id = messages.length;
     messages.push(message);
+    res.json({message})
 
-    setTimeout( () => {
-      res.json({message})
-    }, 5000);
+    // setTimeout( () => {
+    //   res.json({message})
+    // }, 5000);
     
   }
 
@@ -100,7 +101,11 @@ app.post('/fetch-message', express.json(), (req, res) =>  {
   console.log(msgId)
    const curMessage = messages[msgId]
    console.log(curMessage.text)
+
+   setTimeout( () => {
     res.json({curMessage})
+  }, 3000);
+    // res.json({curMessage})
   }
 
 });

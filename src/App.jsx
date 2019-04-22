@@ -61,14 +61,14 @@ class App extends Component {
   // cause duplicate key of two children
   sendMessage(message){
     message.sender = this.state.curUser.name;
-    this.setState({
-      waiting: true
-    }, () => {
+    // this.setState({
+    //   waiting: true
+    // }, () => {
       newMessage(message).then(result => {
         console.log('show spinner')
         this.setState({
           messages: [...this.state.messages, result.message],
-          waiting: false
+          // waiting: false
         })
       })
       .catch( result => {
@@ -79,7 +79,7 @@ class App extends Component {
           error: [result.code]
         })
       })
-    })
+    // })
     
   }
 
@@ -146,25 +146,31 @@ class App extends Component {
   // passing in msgId from message selected
   myClick = (alertMessage) => {
     // alert(alertMessage);
-    fetchMessage(alertMessage).then(result => {
+    this.setState({
+      waiting: true
+    }, () => {
+      fetchMessage(alertMessage).then(result => {
       
-      this.setState({
-        curMessage: result.curMessage,
-        pop: true
-        // goFetch: false
+        this.setState({
+          curMessage: result.curMessage,
+          pop: true,
+          waiting: false
+          // goFetch: false
+        })
+      }).then(() => {
+        // alert(this.state.goFetch);
+        clearInterval(this.interval)
       })
-    }).then(() => {
-      // alert(this.state.goFetch);
-      clearInterval(this.interval)
-    })
-    .catch( result => {
-      // console.log(result.code)
-      //update error message,
-
-      this.setState({
-        error: [result.code]
+      .catch( result => {
+        // console.log(result.code)
+        //update error message,
+  
+        this.setState({
+          error: [result.code]
+        })
       })
     })
+    
     
   }
   backHome = () => {
