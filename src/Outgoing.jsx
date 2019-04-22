@@ -15,12 +15,12 @@ class Outgoing extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.resetInput = this.resetInput.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+    // this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick() {
-    this.props.click();
-  }
+  // handleClick() {
+  //   this.props.click(this.state.value);
+  // }
 
   handleChange(event) {
     this.setState({
@@ -48,7 +48,8 @@ class Outgoing extends React.Component {
       const newMessage = {
         sender: '',
         timestamp: new Date(),
-        text: this.state.value
+        text: this.state.value,
+        id: ''
       }
 
       this.props.send(newMessage);
@@ -67,12 +68,12 @@ class Outgoing extends React.Component {
   render() {
     return (
       <div className="outgoing">
-      <form onSubmit={this.handleSubmit}>
-        <label>
+      <form className="outgoing-form" onSubmit={this.handleSubmit}>
+        <label className="outgoing-input">
           New Message :
-          <input type="text" value={this.state.value} onChange={this.handleChange} onClick={this.handleClick} placeholder="Enter message to send" />
-          <button id="xxx" className="login-button" disabled={this.state.buttonShow} type="submit">Submit</button>
+          <input type="text" value={this.state.value} onChange={this.handleChange}  placeholder="Enter message to send" />
         </label>
+        {/* <button id="xxx" className="login-button" disabled={this.state.buttonShow} type="submit">Submit</button> */}
       </form>
       </div>
     );

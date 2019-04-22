@@ -57,10 +57,14 @@ class Outgoing extends React.Component {
   render() {
     return (
         <div>
-            <div>Log In Page</div>
-            <form onSubmit={this.handleSubmit}>
-                <input type="text" value={this.state.userName} onChange={this.handleChange} placeholder="Enter message to send"/>
-                <button id="xxx" className="login-button" disabled={this.state.buttonShow} type="submit">Log In</button>
+            <h1 className="login-header">Who is the Chief Today?</h1>
+            <form className="login-form" onSubmit={this.handleSubmit}>
+              {/* <div> */}
+              <input type="text" value={this.state.userName} onChange={this.handleChange} placeholder="Enter your name here"/>
+              {/* </div> */}
+              {/* <div> */}
+              <button id="xxx" className="login-button" disabled={this.state.buttonShow} type="submit">Log In</button>
+              {/* </div> */}
           </form>
         </div>
     );
