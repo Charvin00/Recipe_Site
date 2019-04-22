@@ -3,26 +3,29 @@ const app = express();
 const PORT = 5000;
 
 let users= {
-    Apple: true,
-    Banana: true
+    Ramsey: true,
+    Shen: true
   };
 
 let messages = [
     {
-      sender: 'Apple',
-      timestamp: new Date(),
+      sender: 'Ramsey',
+      title: 'Apple',
+      timestamp: new Date(2018, 3, 24, 12, 0, 0, 0),
       text: "choose the red one, really red one!!",
       id: 0
     },
     {
-      sender: 'banana',
-      timestamp: new Date(),
+      sender: 'Shen',
+      title: 'banana',
+      timestamp: new Date(2019, 0, 20, 12, 0, 0, 0),
       text: "peel them first, then eat",
       id: 1
     },
     {
-      sender: 'hotPot',
-      timestamp: new Date(),
+      sender: 'Ramsey',
+      title: 'hotPot',
+      timestamp: new Date(2019, 3, 21, 12, 0, 0, 0),
       text: "Heat up the pot, and then put meat in it!",
       id: 2
     }

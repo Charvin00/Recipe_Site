@@ -15,6 +15,7 @@ class Pop extends React.Component {
   }
   render() {
     return (
+        <div className="pop">
           <div className="message" >
           <div className="meta-info" >
             <div className="sender-info">
@@ -26,6 +27,7 @@ class Pop extends React.Component {
           </div>
           <p className="message-text">{this.props.message.text}</p>
           <button onClick={this.handleClick}>Go Back</button>
+        </div>
         </div>
         );
   

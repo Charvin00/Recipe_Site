@@ -36,11 +36,11 @@ class Messages extends React.Component {
       </li>
     ));
     return (
-      <div display-message>
+      
         <ol className="messages">
           {messageList}
         </ol>
-      </div>
+      
       
     );
   
