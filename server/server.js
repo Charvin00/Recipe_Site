@@ -3,26 +3,29 @@ const app = express();
 const PORT = 5000;
 
 let users= {
-    Apple: true,
-    Banana: true
+    Ramsey: true,
+    Shen: true
   };
 
 let messages = [
     {
-      sender: 'Apple',
-      timestamp: new Date(),
+      sender: 'Ramsey',
+      title: 'Apple',
+      timestamp: new Date(2018, 3, 24, 12, 0, 0, 0),
       text: "choose the red one, really red one!!",
       id: 0
     },
     {
-      sender: 'banana',
-      timestamp: new Date(),
+      sender: 'Shen',
+      title: 'banana',
+      timestamp: new Date(2019, 0, 20, 12, 0, 0, 0),
       text: "peel them first, then eat",
       id: 1
     },
     {
-      sender: 'hotPot',
-      timestamp: new Date(),
+      sender: 'Ramsey',
+      title: 'hotPot',
+      timestamp: new Date(2019, 3, 21, 12, 0, 0, 0),
       text: "Heat up the pot, and then put meat in it!",
       id: 2
     }
@@ -42,10 +45,11 @@ app.post('/post-message', express.json(), (req, res) =>  {
   else {
     message.id = messages.length;
     messages.push(message);
+    res.json({message})
 
-    setTimeout( () => {
-      res.json({message})
-    }, 5000);
+    // setTimeout( () => {
+    //   res.json({message})
+    // }, 5000);
     
   }
 
@@ -100,7 +104,11 @@ app.post('/fetch-message', express.json(), (req, res) =>  {
   console.log(msgId)
    const curMessage = messages[msgId]
    console.log(curMessage.text)
+
+   setTimeout( () => {
     res.json({curMessage})
+  }, 3000);
+    // res.json({curMessage})
   }
 
 });

@@ -11,7 +11,7 @@ export const getMessage = () => {
       if(response.ok) {
         return response.json();
       }
-      return Promise.reject({ code: 'something is wrong', err: response.statusText });
+      return Promise.reject({ code: 'server is not connected', err: response.statusText });
     })
   };
 
@@ -29,7 +29,7 @@ export const getMessage = () => {
       if(response.ok) {
         return response.json();
       }
-      return Promise.reject({ code: 'something is wrong', err: response.statusText });
+      return Promise.reject({ code: 'server is not connected', err: response.statusText });
     })
   };
 
@@ -46,7 +46,7 @@ export const getMessage = () => {
       if(response.ok) {
         return response.json();
       }
-      return Promise.reject({ code: 'something is wrong', err: response.statusText });
+      return Promise.reject({ code: 'server is not connected', err: response.statusText });
     })
   };
 
@@ -64,7 +64,7 @@ export const getMessage = () => {
       if(response.ok) {
         return response.json();
       }
-      return Promise.reject({ code: 'something is wrong', err: response.statusText });
+      return Promise.reject({ code: 'server is not connected', err: response.statusText });
     })
   };
 
@@ -82,6 +82,6 @@ export const getMessage = () => {
       if(response.ok) {
         return response.json();
       }
-      return Promise.reject({ code: 'something is wrong', err: response.statusText });
+      return Promise.reject({ code: 'server is not connected', err: response.statusText });
     })
   };

@@ -38,14 +38,16 @@ class Message extends React.Component {
     return (
           <div className="message" >
             <div className="meta-info" >
-              <div className="sender-info">
-                <span className="username">{this.props.message.sender}</span>
+              <div className="title-info">
+                <span className="username">{this.props.message.title}</span>
               </div>
               <div className="message-info">
-                <span className="timestamp">{this.props.message.timestamp.toString()}</span>
+                <p className="timestamp">{this.props.message.timestamp.toString()}</p>
+                <p className="timestamp">From: {this.props.message.sender}</p>
               </div>
             </div>
-            <p className="message-text" onClick={this.handleClick}>{this.props.message.text}</p>
+            <p className="message-text">{this.props.message.text}</p>
+            <button className="message-button" onClick={this.handleClick}>Try Me!</button>
         </div>
         );
   

@@ -47,6 +47,7 @@ class Outgoing extends React.Component {
     if(this.state.value) {
       const newMessage = {
         sender: '',
+        title: 'test',
         timestamp: new Date(),
         text: this.state.value,
         id: ''
@@ -73,7 +74,7 @@ class Outgoing extends React.Component {
           New Message :
           <input type="text" value={this.state.value} onChange={this.handleChange}  placeholder="Enter message to send" />
         </label>
-        {/* <button id="xxx" className="login-button" disabled={this.state.buttonShow} type="submit">Submit</button> */}
+        <button id="xxx" className="login-button" disabled={this.state.buttonShow} type="submit">Share Your Cusine Today!</button>
       </form>
       </div>
     );

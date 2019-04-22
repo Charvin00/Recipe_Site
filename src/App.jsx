@@ -34,12 +34,30 @@ class App extends Component {
     this.logUser = this.logUser.bind(this);
     this.outUser = this.outUser.bind(this);
     this.myClick = this.myClick.bind(this);
+    this.timeDifference = this.timeDifference.bind(this);
   };
   
   
   updateMessage = () => {
     getMessage().then( result => {
-      // console.log(result);
+      // console.log(result.messages);
+
+      result.messages.map( message => {
+        // console.log(message.timestamp) 
+        // let cur = new Date()
+        let cur = new Date()
+        let msgT = new Date(message.timestamp)
+        let temp = this.timeDifference(cur , msgT);
+        message.timestamp = temp; 
+        
+      })
+
+      // for (let message in result.messages) {
+      //   console.log(message)
+      //   let temp = this.convertTime(message.timestamp);
+      //   message.timeStamp = temp;
+        
+      // }
       this.setState({
         error: '',
         messages: result.messages,
@@ -61,9 +79,9 @@ class App extends Component {
   // cause duplicate key of two children
   sendMessage(message){
     message.sender = this.state.curUser.name;
-    this.setState({
-      waiting: true
-    }, () => {
+    // this.setState({
+    //   waiting: true
+    // }, () => {
       newMessage(message).then(result => {
         console.log('show spinner')
         this.setState({
@@ -79,16 +97,54 @@ class App extends Component {
           error: [result.code]
         })
       })
-    })
+    // })
     
   }
+
+  // convert time stamp to relative time
+   timeDifference(current, previous) {
+    var msPerMinute = 60 * 1000;
+    var msPerHour = msPerMinute * 60;
+    var msPerDay = msPerHour * 24;
+    var msPerMonth = msPerDay * 30;
+    var msPerYear = msPerDay * 365;
+
+    let elapsed = current - previous;
+    // console.log(elapsed)
+
+    if (elapsed < msPerMinute) {
+         return Math.round(elapsed/1000) + ' seconds ago';   
+    }
+
+    else if (elapsed < msPerHour) {
+         return Math.round(elapsed/msPerMinute) + ' minutes ago';   
+    }
+
+    else if (elapsed < msPerDay ) {
+         return Math.round(elapsed/msPerHour ) + ' hours ago';   
+    }
+
+    else if (elapsed < msPerMonth) {
+        return 'approximately ' + Math.round(elapsed/msPerDay) + ' days ago';   
+    }
+
+    else if (elapsed < msPerYear) {
+        return 'approximately ' + Math.round(elapsed/msPerMonth) + ' months ago';   
+    }
+
+    else {
+        return 'approximately ' + Math.round(elapsed/msPerYear ) + ' years ago';   
+    }
+}
 
   componentDidMount() {
     if(this.state.isLoggedIn && this.state.goFetch) {
       this.interval = setInterval(this.updateMessage, 5000);
-    } else {
-      clearInterval(this.interval)
     }
+    //  else {
+    //   clearInterval(this.interval)
+    // }
+
   }
   
   logUser(user){
@@ -146,25 +202,31 @@ class App extends Component {
   // passing in msgId from message selected
   myClick = (alertMessage) => {
     // alert(alertMessage);
-    fetchMessage(alertMessage).then(result => {
+    this.setState({
+      waiting: true
+    }, () => {
+      fetchMessage(alertMessage).then(result => {
       
-      this.setState({
-        curMessage: result.curMessage,
-        pop: true
-        // goFetch: false
+        this.setState({
+          curMessage: result.curMessage,
+          pop: true,
+          waiting: false
+          // goFetch: false
+        })
+      }).then(() => {
+        // alert(this.state.goFetch);
+        clearInterval(this.interval)
       })
-    }).then(() => {
-      // alert(this.state.goFetch);
-      clearInterval(this.interval)
-    })
-    .catch( result => {
-      // console.log(result.code)
-      //update error message,
-
-      this.setState({
-        error: [result.code]
+      .catch( result => {
+        // console.log(result.code)
+        //update error message,
+  
+        this.setState({
+          error: [result.code]
+        })
       })
     })
+    
     
   }
   backHome = () => {
