@@ -8,7 +8,7 @@ import Logout from './Logout.jsx';
 import ErrorMessage from './Error.jsx';
 import Pop from './Pop.jsx';
 import spinner from './spinner.gif';
-
+import Logo from './logo.png';
 import './chat.css';
 
 
@@ -267,7 +267,9 @@ class App extends Component {
           <div className="chat-app">
             <div className="header-container">
               <div className="logo">
-                <h1 className="home header" onClick={this.backHome}>Shen's Bread</h1>
+                <a className="home header" onClick={this.backHome}>
+                  <img alt="logo" src={Logo}/>
+                </a>
               </div>
               <p className="logged-user">Welcome {this.state.curUser.name}</p>
             </div>
@@ -294,7 +296,11 @@ class App extends Component {
         return(
           <div className="chat-app">
             <div className="header-container">
-               <h1 className="home header" onClick={this.backHome}>Shen's Bread</h1>
+              <div className="logo">
+                  <a className="home header" onClick={this.backHome}>
+                    <img alt="logo" src={Logo}/>
+                  </a>
+                </div>
             </div>
             <div className="display-panel">
               {/* <Users users={this.state.users}/> */}
@@ -309,7 +315,11 @@ class App extends Component {
         return(
           <div className="chat-app">
             <div className="header-container">
-            <h1 className="home header" onClick={this.backHome}>Shen's Bread</h1>
+              <div className="logo">
+                  <a className="home header" onClick={this.backHome}>
+                    <img alt="logo" src={Logo}/>
+                  </a>
+              </div>
             </div>
             <div className="display-panel">
               {/* <Users users={this.state.users}/> */}

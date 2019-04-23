@@ -23,6 +23,7 @@ body {
   cursor: pointer;
   max-width: 33%;
   margin: 0 auto;
+  text-align: center;
 }
 /*  =========welcome logged user============ */
 .logged-user {
@@ -31,7 +32,7 @@ body {
   color: white;
   background-color: orange;
   font-weight: bolder;
-  padding: 1% 3%;
+  padding: 0.5% 3%;
 }
 
 /* div.sender-info img {
@@ -228,9 +229,6 @@ button:hover {
 /* ====== for smartphone========= */
 
 @media screen and (max-width: 550px) {
-  /* .display-panel{
-      display: inline;
-  } */
 
   .header-container {
     height: auto;
@@ -258,11 +256,13 @@ button:hover {
   }
 
   .display-panel {
-    padding-top: 34%;
+    padding-top: 20%;
   }
   .messages {
     border-bottom: 1px solid #ccc;
     margin-bottom: 3%;
+    padding-top: 0;
+    padding-bottom: 3%;
   }
 
   #share-button {
