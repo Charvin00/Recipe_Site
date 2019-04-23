@@ -28,6 +28,7 @@ class App extends Component {
       interval: 0,
       pop: false,
       waiting: false,
+      outGoing: false,
     };
     this.updateMessage = this.updateMessage.bind(this);
     this.sendMessage = this.sendMessage.bind(this);
@@ -35,6 +36,7 @@ class App extends Component {
     this.outUser = this.outUser.bind(this);
     this.myClick = this.myClick.bind(this);
     this.timeDifference = this.timeDifference.bind(this);
+    this.handleOutGoing = this.handleOutGoing.bind(this);
   };
   
   
@@ -78,10 +80,11 @@ class App extends Component {
   // new message was somehow added twice problem next!!!!!!! 
   // cause duplicate key of two children
   sendMessage(message){
-    message.sender = this.state.curUser.name;
+    // message.sender = this.state.curUser.name;
     // this.setState({
     //   waiting: true
     // }, () => {
+      console.log(message)
       newMessage(message).then(result => {
         console.log('show spinner')
         this.setState({
@@ -231,7 +234,14 @@ class App extends Component {
   }
   backHome = () => {
     this.setState({
-      pop: false
+      pop: false,
+      outGoing: false
+    })
+  }
+
+  handleOutGoing() {
+    this.setState({
+      outGoing: true
     })
   }
 
@@ -242,38 +252,57 @@ class App extends Component {
   render() {
 
     if(this.state.isLoggedIn) {
-      if(!this.state.pop) {
+      if(!this.state.pop && !this.state.outGoing) {
+        // browse page:
         return (
           <div className="chat-app">
             <div className="header-container">
-               <h1 className="header">Shen's Bread</h1>
+            <h1 className="header" onClick={this.backHome}>Shen's Bread</h1>
+            <p className="logged-user">Welcome {this.state.curUser.name}</p>
             </div>
             
             <div className="display-panel">
-              <Users users={this.state.users}/>
+              {/* <Users users={this.state.users}/> */}
               {this.state.waiting ? <img alt="waiting" src={spinner} className="spinner"/> :
                 <Messages messages={this.state.messages} click={this.myClick}  />
               }
             </div>
-            <Outgoing send={this.sendMessage} />
+            <button onClick={this.handleOutGoing}>Share Your Cusine Today!</button>
             <Logout send={this.outUser} curUser={this.state.curUser} />
             <ErrorMessage error = {this.state.error}/>
           </div>
         );
       } 
-      else {
+      else if (this.state.pop) {
         // if selected pop:
         return(
           <div className="chat-app">
-            <h1 className="header">Shen's Bread</h1>
+            <div className="header-container">
+               <h1 className="header" onClick={this.backHome}>Shen's Bread</h1>
+            </div>
             <div className="display-panel">
-              <Users users={this.state.users}/>
+              {/* <Users users={this.state.users}/> */}
               <Pop message={this.state.curMessage} click={this.backHome} />
-              {/* <Outgoing send={this.sendMessage} /> */}
             </div>
             <ErrorMessage error = {this.state.error}/>
         </div>
         )
+      }
+      else if (this.state.outGoing) {
+        // outGoing page:
+        return(
+          <div className="chat-app">
+            <div className="header-container">
+            <h1 className="header" onClick={this.backHome}>Shen's Bread</h1>
+            </div>
+            <div className="display-panel">
+              {/* <Users users={this.state.users}/> */}
+              <Outgoing send={this.sendMessage} click={this.backHome} curUser={this.state.curUser.name} />
+            </div>
+            <ErrorMessage error = {this.state.error}/>
+        </div>
+        )
+      
       }
       
     }

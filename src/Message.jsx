@@ -36,7 +36,30 @@ class Message extends React.Component {
   }
   render() {
     return (
-          <div className="message" >
+
+      <div className="message" >
+            <picture></picture>
+              <div className="message-info">
+                <h2 className="title">{this.props.message.title}</h2>
+                  <div className="small-info">
+                  <p className="timestamp">By: {this.props.message.sender}</p>
+                  {/* <p className="message-text">{this.props.message.text}</p> */}
+                  <p className="timestamp">{this.props.message.timestamp.toString()}</p>
+                </div>
+              </div>
+              
+            
+            
+            <button className="message-button" onClick={this.handleClick}>Try Me!</button>
+        </div>
+         
+        );
+  
+  }
+}
+export default Message;
+
+ {/* <div className="message" >
             <div className="meta-info" >
               <div className="title-info">
                 <span className="username">{this.props.message.title}</span>
@@ -48,9 +71,4 @@ class Message extends React.Component {
             </div>
             <p className="message-text">{this.props.message.text}</p>
             <button className="message-button" onClick={this.handleClick}>Try Me!</button>
-        </div>
-        );
-  
-  }
-}
-export default Message;
+        </div> */}

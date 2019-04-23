@@ -31,15 +31,15 @@ class Messages extends React.Component {
   }
   render() {
     const messageList = this.props.messages.map( message => (
-      <li key={message.id}>
+      <section key={message.id}>
         <Message message={message} click={this.handleClick} data={message.id} />
-      </li>
+      </section>
     ));
     return (
       
-        <ol className="messages">
+        <div className="messages">
           {messageList}
-        </ol>
+        </div>
       
       
     );
