@@ -48,9 +48,9 @@ class LogOut extends React.Component {
 
   render() {
     return (
-        <div>
-            <button onClick={this.handleSubmit} className="login-button" style={this.state.buttonShow} >Log Out</button>
-        </div>
+        
+        <button id="log-out-button" onClick={this.handleSubmit} className="login-button" style={this.state.buttonShow} >Log Out</button>
+        
     );
   }
 }
