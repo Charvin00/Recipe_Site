@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import Users from './Users';
 import Recipes from './Recipes';
 import Outgoing from './Outgoing';
 import { newUser, deleteUser, fetchRecipe, getRecipe, newRecipe } from './services';
@@ -37,7 +36,9 @@ class App extends Component {
     this.handleOutGoing = this.handleOutGoing.bind(this);
   };
 
+  /*  ========= recipes functions ============ */
 
+  // update recipe list by fetching from server
   updateRecipes = () => {
     getRecipe().then(result => {
       result.recipes.map(recipe => {
@@ -61,6 +62,7 @@ class App extends Component {
       })
   }
 
+  // sending out recipe
   sendRecipe(recipe) {
     console.log(recipe)
     newRecipe(recipe).then(result => {
@@ -112,14 +114,14 @@ class App extends Component {
     }
   }
 
+  // auto polling data every 5 second
   componentDidMount() {
-    if (this.state.isLoggedIn && this.state.goFetch) {
-      this.interval = setInterval(this.updateRecipes, 5000);
-    }
-
+    this.interval = setInterval(this.updateRecipes, 5000);
   }
 
+  // log in user
   logUser(user) {
+    // loading spinner after log in
     this.setState({
       waiting: true
     }, () => {
@@ -133,6 +135,7 @@ class App extends Component {
       })
         .then(() => {
           this.componentDidMount();
+          // set time out to let spinner loading 5 sec
           setTimeout(() => {
             this.setState({
               waiting: false
@@ -169,11 +172,11 @@ class App extends Component {
 
   // passing in recipeId from recipe selected
   clickPop = (curMsg) => {
+    // loading spinner after desired recipe
     this.setState({
       waiting: true
     }, () => {
       fetchRecipe(curMsg).then(result => {
-
         this.setState({
           curRecipe: result.curRecipe,
           pop: true,
@@ -191,6 +194,8 @@ class App extends Component {
 
 
   }
+
+  // back to home button function
   backHome = () => {
     this.setState({
       pop: false,
@@ -198,14 +203,12 @@ class App extends Component {
     })
   }
 
+  // display add new recipe page
   handleOutGoing() {
     this.setState({
       outGoing: true
     })
   }
-
-
-
 
   //====== page call back: =====
   render() {
@@ -217,9 +220,9 @@ class App extends Component {
           <div className="chat-app">
             <div className="header-container">
               <div className="logo">
-                <a className="home header" onClick={this.backHome}>
+                <div className="home header" href="" onClick={this.backHome}>
                   <img alt="logo" src={Logo} />
-                </a>
+                </div>
               </div>
               <p className="logged-user">Welcome {this.state.curUser.name}</p>
             </div>
@@ -243,9 +246,9 @@ class App extends Component {
           <div className="chat-app">
             <div className="header-container">
               <div className="logo">
-                <a className="home header" onClick={this.backHome}>
+                <div className="home header" onClick={this.backHome}>
                   <img alt="logo" src={Logo} />
-                </a>
+                </div>
               </div>
             </div>
             <div className="display-panel">

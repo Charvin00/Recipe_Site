@@ -9,6 +9,7 @@ class Pop extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
+  // go back button click function, calls parent component back home function
   handleClick(e) {
     // const msgId = e.target
     this.props.click(this.props.back);

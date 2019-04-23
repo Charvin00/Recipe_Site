@@ -11,12 +11,13 @@ class Recipes extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
+  // try me button click function, calls parent component click pop function
   handleClick(e) {
     this.props.click(e);
   }
   render() {
     const recipeList = this.props.recipes.map(recipe => (
-      <section key={recipe.text}>
+      <section key={recipe.id}>
         <Recipe recipe={recipe} click={this.handleClick} data={recipe.id} />
       </section>
     ));

@@ -35,10 +35,12 @@ let isLoggedIn = false;
 
 // ==============recipe rest calls:=============
 
+// fetch recipe list
 app.get('/new-recipe', express.json(), (req, res) => {
   res.json({ users, recipes });
 });
 
+// add new recipe user inputed
 app.post('/post-recipe', express.json(), (req, res) => {
   const { recipe } = req.body;
   console.log(recipe);
@@ -49,16 +51,14 @@ app.post('/post-recipe', express.json(), (req, res) => {
     recipe.id = recipes.length;
     recipes.push(recipe);
     res.json({ recipe })
-
   }
 
 });
 
-//fetch selected message
+//fetch selected recipe
 app.post('/fetch-recipe', express.json(), (req, res) => {
   let rcpId = req.body.recipeId;
   rcpId = parseInt(rcpId, 10)
-  console.log("test msg id: " + rcpId);
 
   if (rcpId === null) {
     res.status(400).json({ error: `text' property are required` });
@@ -68,6 +68,7 @@ app.post('/fetch-recipe', express.json(), (req, res) => {
     const curRecipe = recipes[rcpId]
     console.log(curRecipe.text)
 
+    // set time out to let spinner loading 3 sec
     setTimeout(() => {
       res.json({ curRecipe })
     }, 3000);

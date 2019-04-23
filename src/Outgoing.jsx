@@ -18,7 +18,7 @@ class Outgoing extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-
+// store user input to current state attribute
   handleTitleChange(event) {
     this.setState({
       inputTitle: event.target.value
@@ -34,7 +34,7 @@ class Outgoing extends React.Component {
       }
     });
   }
-
+// store user input to current state attribute
   handleTextChange(event) {
     this.setState({
       inputText: event.target.value
@@ -51,8 +51,8 @@ class Outgoing extends React.Component {
     });
   }
 
+  // submit the new recipe, pass it to parent component send recipe function
   handleSubmit(event) {
-    // alert('A name was submitted: ' + this.state.value);
     event.preventDefault();
 
     if (this.state.inputText && this.state.inputTitle) {
@@ -79,6 +79,7 @@ class Outgoing extends React.Component {
     });
   }
 
+  // back to home
   handleClick(e) {
     this.props.click(this.props.back);
   }
