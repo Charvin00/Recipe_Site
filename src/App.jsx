@@ -150,28 +150,38 @@ class App extends Component {
   }
   
   logUser(user){
-    newUser(user).then(result => {
-      this.setState({
-        users: {...this.state.users, [result.user.name]:true},
-        isLoggedIn: result.isLoggedIn,
-        curUser: result.user,
-        goFetch: true,
-      }) 
-    })
-    .then( () => {
-      // if(this.state.isLoggedIn && this.state.goFetch) {
-      //   // timer = setInterval(this.updateMessage, 5000);
-      // }
-      this.componentDidMount()
-    })
-    .catch( result => {
-      // console.log(result.code)
-      //update error message,
-
-      this.setState({
-        error: [result.code]
+    this.setState({
+      waiting: true
+    }, () => {
+      newUser(user).then(result => {
+        this.setState({
+          users: {...this.state.users, [result.user.name]:true},
+          isLoggedIn: result.isLoggedIn,
+          curUser: result.user,
+          goFetch: true,
+        }) 
+      })
+      .then( () => {
+        // if(this.state.isLoggedIn && this.state.goFetch) {
+        //   // timer = setInterval(this.updateMessage, 5000);
+        // }
+        this.componentDidMount();
+        setTimeout( () => {
+          this.setState({
+            waiting: false
+          })
+        }, 5000);
+      })
+      .catch( result => {
+        // console.log(result.code)
+        //update error message,
+  
+        this.setState({
+          error: [result.code]
+        })
       })
     })
+    
   }
 
   // Log out user
