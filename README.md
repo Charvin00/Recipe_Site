@@ -12,6 +12,8 @@ Shen Wang
 React for Front End
 Express for Back End
 Grid styling with responsive design
+Add relative time stamp
+Styling with fantasy typography 
 
 ## Video Demo
 

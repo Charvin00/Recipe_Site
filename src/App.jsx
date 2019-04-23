@@ -81,11 +81,11 @@ class App extends Component {
 
   // convert time stamp to relative time
   timeDifference(current, previous) {
-    var msPerMinute = 60 * 1000;
-    var msPerHour = msPerMinute * 60;
-    var msPerDay = msPerHour * 24;
-    var msPerMonth = msPerDay * 30;
-    var msPerYear = msPerDay * 365;
+    let msPerMinute = 60 * 1000;
+    let msPerHour = msPerMinute * 60;
+    let msPerDay = msPerHour * 24;
+    let msPerMonth = msPerDay * 30;
+    let msPerYear = msPerDay * 365;
 
     let elapsed = current - previous;
 
@@ -264,9 +264,9 @@ class App extends Component {
           <div className="chat-app">
             <div className="header-container">
               <div className="logo">
-                <a className="home header" onClick={this.backHome}>
+                <div className="home header" onClick={this.backHome}>
                   <img alt="logo" src={Logo} />
-                </a>
+                </div>
               </div>
             </div>
             <div className="display-panel">
