@@ -23,11 +23,11 @@ class Outgoing extends React.Component {
     this.setState({
       inputTitle: event.target.value
     }, () => {
-      if(this.state.inputTitle && this.state.inputText) {
+      if (this.state.inputTitle && this.state.inputText) {
         this.setState({
           buttonShow: false
         });
-      } else{
+      } else {
         this.setState({
           buttonShow: true
         })
@@ -39,11 +39,11 @@ class Outgoing extends React.Component {
     this.setState({
       inputText: event.target.value
     }, () => {
-      if(this.state.inputText && this.state.inputTitle) {
+      if (this.state.inputText && this.state.inputTitle) {
         this.setState({
           buttonShow: false
         });
-      } else{
+      } else {
         this.setState({
           buttonShow: true
         })
@@ -54,19 +54,18 @@ class Outgoing extends React.Component {
   handleSubmit(event) {
     // alert('A name was submitted: ' + this.state.value);
     event.preventDefault();
-    
-    if(this.state.inputText && this.state.inputTitle) {
-      const newMessage = {
+
+    if (this.state.inputText && this.state.inputTitle) {
+      const newRecipe = {
         sender: this.props.curUser,
         title: this.state.inputTitle,
         timestamp: new Date(),
         text: this.state.inputText,
         id: ''
       }
-
-      this.props.send(newMessage);
+      this.props.send(newRecipe);
       this.resetInput();
-      // alert(newMessage.text + " " + newMessage.sender)
+
       this.props.click(this.props.back);
     }
   }
@@ -75,39 +74,39 @@ class Outgoing extends React.Component {
   resetInput() {
     this.setState({
       inputText: "",
-      buttonShow: true
+      buttonShow: true,
+      inputTitle: ""
     });
   }
 
   handleClick(e) {
-    // const msgId = e.target
     this.props.click(this.props.back);
   }
 
   render() {
     return (
       <div className="outgoing">
-      <span className="outgoing-input">
-            What dish we are doing today?
+        <span className="outgoing-input">
+          What dish we are doing today?
       </span>
-        <div className="container title-input"> 
-          
-          <input className="input" type="title" value={this.state.inputTitle} onChange={this.handleTitleChange}  placeholder="What dish we are doing today?" />
+        <div className="container title-input">
+
+          <input className="input" type="title" value={this.state.inputTitle} onChange={this.handleTitleChange} placeholder="What dish we are doing today?" />
           <span className="border"></span>
         </div>
 
-        <div className="container title-text"> 
-          <input className="input" type="text" value={this.state.value} onChange={this.handleTextChange}  placeholder="How to do it?" />
+        <div className="container title-text">
+          <input className="input" type="text" value={this.state.value} onChange={this.handleTextChange} placeholder="How to do it?" />
           <span className="border"></span>
         </div>
 
         <div className="log-button">
-          <button  className="login-button" disabled={this.state.buttonShow} onClick={this.handleSubmit}>Share It</button>
+          <button className="login-button" disabled={this.state.buttonShow} onClick={this.handleSubmit}>Share It</button>
         </div>
-        
-      <button onClick={this.handleClick}>Go Back</button>
+
+        <button onClick={this.handleClick}>Go Back</button>
       </div>
-      
+
     );
   }
 }

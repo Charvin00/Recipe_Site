@@ -19,28 +19,28 @@ class Outgoing extends React.Component {
     this.setState({
       userName: event.target.value
     }, () => {
-      if(this.state.userName) {
+      if (this.state.userName) {
         this.setState({
           buttonShow: false
         });
-      } else{
+      } else {
         this.setState({
           buttonShow: true
         })
       }
     });
-    
-     
+
+
   }
 
   handleSubmit(event) {
     // alert('A name was submitted: ' + this.state.value);
     event.preventDefault();
-    
-    if(this.state.userName) {
-        const newUser = {
-            name: this.state.userName
-        }
+
+    if (this.state.userName) {
+      const newUser = {
+        name: this.state.userName
+      }
       this.props.send(newUser);
       this.resetInput();
     }
@@ -56,20 +56,16 @@ class Outgoing extends React.Component {
 
   render() {
     return (
-        <div>
-            <h1 className="header">Who is the Chief Today?</h1>
-            <div className="login-form container">
-              {/* <div> */}
-              <input className="input" type="text" value={this.state.userName} onChange={this.handleChange} placeholder="Enter your name here"/>
-              <span className="border"></span>
-              {/* </div> */}
-              {/* <div> */}
-              {/* </div> */}
-          </div>
-          <div className="log-in-button">
-          <button className="login-button" disabled={this.state.buttonShow} onClick={this.handleSubmit} type="submit">Log In</button>
-          </div>
+      <div>
+        <h1 className="header">Who is the Chief Today?</h1>
+        <div className="login-form container">
+          <input className="input" type="text" value={this.state.userName} onChange={this.handleChange} placeholder="Enter your name here" />
+          <span className="border"></span>
         </div>
+        <div className="log-in-button">
+          <button className="login-button" disabled={this.state.buttonShow} onClick={this.handleSubmit} type="submit">Log In</button>
+        </div>
+      </div>
     );
   }
 }

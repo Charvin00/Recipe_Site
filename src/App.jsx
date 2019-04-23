@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 // import Users from './Users';
-import Messages from './Messages';
+import Recipes from './Recipes';
 import Outgoing from './Outgoing';
-import { newUser, deleteUser, fetchMessage, getMessage, newMessage } from './services';
+import { newUser, deleteUser, fetchRecipe, getRecipe, newRecipe } from './services';
 import Login from './Login.jsx';
 import Logout from './Logout.jsx';
 import ErrorMessage from './Error.jsx';
@@ -16,95 +16,69 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      users:  {},
+      users: {},
       curUser: '', //current user
-      //message list:
-      messages: [],
+      recipes: [], //recipes list:
       isLoggedIn: false,
-      error:'',
-      curMessage: '',
+      error: '',
+      curRecipe: '',
       goFetch: true,
       interval: 0,
       pop: false,
       waiting: false,
       outGoing: false,
     };
-    this.updateMessage = this.updateMessage.bind(this);
-    this.sendMessage = this.sendMessage.bind(this);
+    this.updateRecipes = this.updateRecipes.bind(this);
+    this.sendRecipe = this.sendRecipe.bind(this);
     this.logUser = this.logUser.bind(this);
     this.outUser = this.outUser.bind(this);
-    this.myClick = this.myClick.bind(this);
+    this.clickPop = this.clickPop.bind(this);
     this.timeDifference = this.timeDifference.bind(this);
     this.handleOutGoing = this.handleOutGoing.bind(this);
   };
-  
-  
-  updateMessage = () => {
-    getMessage().then( result => {
-      // console.log(result.messages);
 
-      result.messages.map( message => {
-        // console.log(message.timestamp) 
-        // let cur = new Date()
+
+  updateRecipes = () => {
+    getRecipe().then(result => {
+      result.recipes.map(recipe => {
         let cur = new Date()
-        let msgT = new Date(message.timestamp)
-        let temp = this.timeDifference(cur , msgT);
-        message.timestamp = temp; 
-        return('');
+        let msgT = new Date(recipe.timestamp)
+        let temp = this.timeDifference(cur, msgT);
+        recipe.timestamp = temp;
+        return ('');
       })
-
-      // for (let message in result.messages) {
-      //   console.log(message)
-      //   let temp = this.convertTime(message.timestamp);
-      //   message.timeStamp = temp;
-        
-      // }
       this.setState({
         error: '',
-        messages: result.messages,
+        recipes: result.recipes,
         users: result.users,
       })
     })
-    //for error message:
-    .catch( result => {
-      // console.log(result.code)
-      //update error message,
-
-      this.setState({
-        error: [result.code]
-      })
-    })
-  }
-  
-  // new message was somehow added twice problem next!!!!!!! 
-  // cause duplicate key of two children
-  sendMessage(message){
-    // message.sender = this.state.curUser.name;
-    // this.setState({
-    //   waiting: true
-    // }, () => {
-      console.log(message)
-      newMessage(message).then(result => {
-        console.log('show spinner')
-        this.setState({
-          messages: [...this.state.messages, result.message],
-          waiting: false
-        })
-      })
-      .catch( result => {
-        // console.log(result.code)
-        //update error message,
-  
+      //for error message:
+      .catch(result => {
         this.setState({
           error: [result.code]
         })
       })
-    // })
-    
+  }
+
+  sendRecipe(recipe) {
+    console.log(recipe)
+    newRecipe(recipe).then(result => {
+      console.log('show spinner')
+      this.setState({
+        recipes: [...this.state.recipes, result.recipe],
+        waiting: false
+      })
+    })
+      .catch(result => {
+        this.setState({
+          error: [result.code]
+        })
+      })
   }
 
   // convert time stamp to relative time
-   timeDifference(current, previous) {
+  timeDifference(current, previous) {
     var msPerMinute = 60 * 1000;
     var msPerHour = msPerMinute * 60;
     var msPerDay = msPerHour * 24;
@@ -112,134 +86,110 @@ class App extends Component {
     var msPerYear = msPerDay * 365;
 
     let elapsed = current - previous;
-    // console.log(elapsed)
 
     if (elapsed < msPerMinute) {
-         return Math.round(elapsed/1000) + ' seconds ago';   
+      return Math.round(elapsed / 1000) + ' seconds ago';
     }
 
     else if (elapsed < msPerHour) {
-         return Math.round(elapsed/msPerMinute) + ' minutes ago';   
+      return Math.round(elapsed / msPerMinute) + ' minutes ago';
     }
 
-    else if (elapsed < msPerDay ) {
-         return Math.round(elapsed/msPerHour ) + ' hours ago';   
+    else if (elapsed < msPerDay) {
+      return Math.round(elapsed / msPerHour) + ' hours ago';
     }
 
     else if (elapsed < msPerMonth) {
-        return 'approximately ' + Math.round(elapsed/msPerDay) + ' days ago';   
+      return 'approximately ' + Math.round(elapsed / msPerDay) + ' days ago';
     }
 
     else if (elapsed < msPerYear) {
-        return 'approximately ' + Math.round(elapsed/msPerMonth) + ' months ago';   
+      return 'approximately ' + Math.round(elapsed / msPerMonth) + ' months ago';
     }
 
     else {
-        return 'approximately ' + Math.round(elapsed/msPerYear ) + ' years ago';   
+      return 'approximately ' + Math.round(elapsed / msPerYear) + ' years ago';
     }
-}
+  }
 
   componentDidMount() {
-    if(this.state.isLoggedIn && this.state.goFetch) {
-      this.interval = setInterval(this.updateMessage, 5000);
+    if (this.state.isLoggedIn && this.state.goFetch) {
+      this.interval = setInterval(this.updateRecipes, 5000);
     }
-    //  else {
-    //   clearInterval(this.interval)
-    // }
 
   }
-  
-  logUser(user){
+
+  logUser(user) {
     this.setState({
       waiting: true
     }, () => {
       newUser(user).then(result => {
         this.setState({
-          users: {...this.state.users, [result.user.name]:true},
+          users: { ...this.state.users, [result.user.name]: true },
           isLoggedIn: result.isLoggedIn,
           curUser: result.user,
           goFetch: true,
-        }) 
-      })
-      .then( () => {
-        // if(this.state.isLoggedIn && this.state.goFetch) {
-        //   // timer = setInterval(this.updateMessage, 5000);
-        // }
-        this.componentDidMount();
-        setTimeout( () => {
-          this.setState({
-            waiting: false
-          })
-        }, 5000);
-      })
-      .catch( result => {
-        // console.log(result.code)
-        //update error message,
-  
-        this.setState({
-          error: [result.code]
         })
       })
+        .then(() => {
+          this.componentDidMount();
+          setTimeout(() => {
+            this.setState({
+              waiting: false
+            })
+          }, 5000);
+        })
+        .catch(result => {
+          this.setState({
+            error: [result.code]
+          })
+        })
     })
-    
+
   }
 
   // Log out user
-  outUser(){
+  outUser() {
     deleteUser(this.state.curUser).then(result => {
-      // alert(this.state.curUser.name)
       this.setState({
         users: result.users,
         isLoggedIn: result.isLoggedIn,
         curUser: {},
-        // goFetch: true,
-      }) 
-    })
-    .then( () => {
-      // if(this.state.isLoggedIn && this.state.goFetch) {
-      //   // timer = setInterval(this.updateMessage, 5000);
-      // }
-      this.componentDidMount()
-    })
-    .catch( result => {
-      // console.log(result.code)
-      //update error message,
-
-      this.setState({
-        error: [result.code]
       })
     })
-  }
-
-  // passing in msgId from message selected
-  myClick = (alertMessage) => {
-    // alert(alertMessage);
-    this.setState({
-      waiting: true
-    }, () => {
-      fetchMessage(alertMessage).then(result => {
-      
-        this.setState({
-          curMessage: result.curMessage,
-          pop: true,
-          waiting: false
-          // goFetch: false
-        })
-      }).then(() => {
-        // alert(this.state.goFetch);
-        clearInterval(this.interval)
+      .then(() => {
+        this.componentDidMount()
       })
-      .catch( result => {
-        // console.log(result.code)
-        //update error message,
-  
+      .catch(result => {
         this.setState({
           error: [result.code]
         })
       })
+  }
+
+  // passing in recipeId from recipe selected
+  clickPop = (curMsg) => {
+    this.setState({
+      waiting: true
+    }, () => {
+      fetchRecipe(curMsg).then(result => {
+
+        this.setState({
+          curRecipe: result.curRecipe,
+          pop: true,
+          waiting: false
+        })
+      }).then(() => {
+        clearInterval(this.interval)
+      })
+        .catch(result => {
+          this.setState({
+            error: [result.code]
+          })
+        })
     })
-    
-    
+
+
   }
   backHome = () => {
     this.setState({
@@ -255,95 +205,89 @@ class App extends Component {
   }
 
 
-  
+
 
   //====== page call back: =====
   render() {
 
-    if(this.state.isLoggedIn) {
-      if(!this.state.pop && !this.state.outGoing) {
+    if (this.state.isLoggedIn) {
+      if (!this.state.pop && !this.state.outGoing) {
         // browse page:
         return (
           <div className="chat-app">
             <div className="header-container">
               <div className="logo">
                 <a className="home header" onClick={this.backHome}>
-                  <img alt="logo" src={Logo}/>
+                  <img alt="logo" src={Logo} />
                 </a>
               </div>
               <p className="logged-user">Welcome {this.state.curUser.name}</p>
             </div>
-            {this.state.waiting ? 
-              <img alt="waiting" src={spinner} className="spinner"/>
-            :
-            <div className="display-panel">
-              {/* <Users users={this.state.users}/> */}
-              
-                <Messages messages={this.state.messages} click={this.myClick}  />
+            {this.state.waiting ?
+              <img alt="waiting" src={spinner} className="spinner" />
+              :
+              <div className="display-panel">
+                <Recipes recipes={this.state.recipes} click={this.clickPop} />
                 <button id="share-button" onClick={this.handleOutGoing}>Share Your Cusine Today!</button>
                 <Logout send={this.outUser} curUser={this.state.curUser} />
-            </div>
+              </div>
             }
-            
-            
-            <ErrorMessage error = {this.state.error}/>
+            <ErrorMessage error={this.state.error} />
           </div>
-            
+
         );
-      } 
+      }
       else if (this.state.pop) {
         // if selected pop:
-        return(
+        return (
           <div className="chat-app">
             <div className="header-container">
               <div className="logo">
-                  <a className="home header" onClick={this.backHome}>
-                    <img alt="logo" src={Logo}/>
-                  </a>
-                </div>
+                <a className="home header" onClick={this.backHome}>
+                  <img alt="logo" src={Logo} />
+                </a>
+              </div>
             </div>
             <div className="display-panel">
-              {/* <Users users={this.state.users}/> */}
-              <Pop message={this.state.curMessage} click={this.backHome} />
+              <Pop curRecipe={this.state.curRecipe} click={this.backHome} />
             </div>
-            <ErrorMessage error = {this.state.error}/>
-        </div>
+            <ErrorMessage error={this.state.error} />
+          </div>
         )
       }
       else if (this.state.outGoing) {
         // outGoing page:
-        return(
+        return (
           <div className="chat-app">
             <div className="header-container">
               <div className="logo">
-                  <a className="home header" onClick={this.backHome}>
-                    <img alt="logo" src={Logo}/>
-                  </a>
+                <a className="home header" onClick={this.backHome}>
+                  <img alt="logo" src={Logo} />
+                </a>
               </div>
             </div>
             <div className="display-panel">
-              {/* <Users users={this.state.users}/> */}
-              <Outgoing send={this.sendMessage} click={this.backHome} curUser={this.state.curUser.name} />
+              <Outgoing send={this.sendRecipe} click={this.backHome} curUser={this.state.curUser.name} />
             </div>
-            <ErrorMessage error = {this.state.error}/>
-        </div>
+            <ErrorMessage error={this.state.error} />
+          </div>
         )
-      
+
       }
-      
+
     }
     // if not logged in: 
     else {
       //go to login page
-      return(      
+      return (
         <div className="login">
-          <Login send={this.logUser}/>
-          <ErrorMessage error={this.state.error}/>
+          <Login send={this.logUser} />
+          <ErrorMessage error={this.state.error} />
         </div>
       );
-      
+
     }
-    
+
   }
 }
 
