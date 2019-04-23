@@ -266,16 +266,20 @@ class App extends Component {
         return (
           <div className="chat-app">
             <div className="header-container">
-              <h1 className="header" onClick={this.backHome}>Shen's Bread</h1>
+              <div className="logo">
+                <h1 className="home header" onClick={this.backHome}>Shen's Bread</h1>
+              </div>
               <p className="logged-user">Welcome {this.state.curUser.name}</p>
             </div>
-            {this.state.waiting ? <img alt="waiting" src={spinner} className="spinner"/> :
+            {this.state.waiting ? 
+              <img alt="waiting" src={spinner} className="spinner"/>
+            :
             <div className="display-panel">
               {/* <Users users={this.state.users}/> */}
               
                 <Messages messages={this.state.messages} click={this.myClick}  />
-                <button onClick={this.handleOutGoing}>Share Your Cusine Today!</button>
-            <Logout send={this.outUser} curUser={this.state.curUser} />
+                <button id="share-button" onClick={this.handleOutGoing}>Share Your Cusine Today!</button>
+                <Logout send={this.outUser} curUser={this.state.curUser} />
             </div>
             }
             
@@ -290,7 +294,7 @@ class App extends Component {
         return(
           <div className="chat-app">
             <div className="header-container">
-               <h1 className="header" onClick={this.backHome}>Shen's Bread</h1>
+               <h1 className="home header" onClick={this.backHome}>Shen's Bread</h1>
             </div>
             <div className="display-panel">
               {/* <Users users={this.state.users}/> */}
@@ -305,7 +309,7 @@ class App extends Component {
         return(
           <div className="chat-app">
             <div className="header-container">
-            <h1 className="header" onClick={this.backHome}>Shen's Bread</h1>
+            <h1 className="home header" onClick={this.backHome}>Shen's Bread</h1>
             </div>
             <div className="display-panel">
               {/* <Users users={this.state.users}/> */}

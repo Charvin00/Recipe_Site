@@ -57,7 +57,7 @@ class Outgoing extends React.Component {
   render() {
     return (
         <div>
-            <h1 className="login-header">Who is the Chief Today?</h1>
+            <h1 className="header">Who is the Chief Today?</h1>
             <div className="login-form container">
               {/* <div> */}
               <input className="input" type="text" value={this.state.userName} onChange={this.handleChange} placeholder="Enter your name here"/>
@@ -66,8 +66,8 @@ class Outgoing extends React.Component {
               {/* <div> */}
               {/* </div> */}
           </div>
-          <div className="log-button">
-          <button id="xxx" className="login-button" disabled={this.state.buttonShow} onClick={this.handleSubmit} type="submit">Log In</button>
+          <div className="log-in-button">
+          <button className="login-button" disabled={this.state.buttonShow} onClick={this.handleSubmit} type="submit">Log In</button>
           </div>
         </div>
     );

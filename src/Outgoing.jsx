@@ -23,7 +23,7 @@ class Outgoing extends React.Component {
     this.setState({
       inputTitle: event.target.value
     }, () => {
-      if(this.state.inputTitle) {
+      if(this.state.inputTitle && this.state.inputText) {
         this.setState({
           buttonShow: false
         });
@@ -39,7 +39,7 @@ class Outgoing extends React.Component {
     this.setState({
       inputText: event.target.value
     }, () => {
-      if(this.state.inputText) {
+      if(this.state.inputText && this.state.inputTitle) {
         this.setState({
           buttonShow: false
         });
@@ -87,14 +87,24 @@ class Outgoing extends React.Component {
   render() {
     return (
       <div className="outgoing">
-      <form className="outgoing-form" onSubmit={this.handleSubmit}>
-        <label className="outgoing-input">
-          New Message :
-          <input type="title" value={this.state.inputTitle} onChange={this.handleTitleChange}  placeholder="What dish we are doing today?" />
-          <input type="text" value={this.state.value} onChange={this.handleTextChange}  placeholder="How to do it?" />
-        </label>
-        <button id="xxx" className="login-button" disabled={this.state.buttonShow} type="submit">Share Your Cusine Today!</button>
-      </form>
+      <span className="outgoing-input">
+            What dish we are doing today?
+      </span>
+        <div className="container title-input"> 
+          
+          <input className="input" type="title" value={this.state.inputTitle} onChange={this.handleTitleChange}  placeholder="What dish we are doing today?" />
+          <span className="border"></span>
+        </div>
+
+        <div className="container title-text"> 
+          <input className="input" type="text" value={this.state.value} onChange={this.handleTextChange}  placeholder="How to do it?" />
+          <span className="border"></span>
+        </div>
+
+        <div className="log-button">
+          <button  className="login-button" disabled={this.state.buttonShow} onClick={this.handleSubmit}>Share It</button>
+        </div>
+        
       <button onClick={this.handleClick}>Go Back</button>
       </div>
       
