@@ -115,21 +115,51 @@ form {
   grid-template-rows: 50% 50%;
   grid-row-gap: 71%;
 }
-input{
+/*===== input focus effect ======= */
+.container {
+  position: relative;
+}
+.input{
   font: chalkduster;
   border-radius: 0;
   border: none;
-  border-bottom: 2px solid orange;
+  border-bottom: 1px solid #ccc;
+  /* border-bottom: 2px solid orange; */
   height: 30px;
   text-align: center;
+  width: 100%
 }
+
+.input ~ .border {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: orange;
+}
+
+:focus {
+  outline: none;
+}
+
+.input:focus ~ .border {
+  width: 100%;
+  transition: 0.5s;
+}
+.log-button {
+  margin-top: 3%
+}
+
+/* =================== */
 button{
   font-family: chalkduster;
   border-radius: 100px;
   border:2px solid orange;
-  margin-left: 40%;
-  margin-right: 40%;
+  margin: 0 auto;
   cursor: pointer;
+  display: block;
+  font-size: 16px;
 }
 
 /*======== pop page=========== */

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Users from './Users';
+// import Users from './Users';
 import Messages from './Messages';
 import Outgoing from './Outgoing';
 import { newUser, deleteUser, fetchMessage, getMessage, newMessage } from './services';
@@ -16,7 +16,6 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      value:'',
       users:  {},
       curUser: '', //current user
       //message list:
@@ -51,7 +50,7 @@ class App extends Component {
         let msgT = new Date(message.timestamp)
         let temp = this.timeDifference(cur , msgT);
         message.timestamp = temp; 
-        
+        return('');
       })
 
       // for (let message in result.messages) {
@@ -257,20 +256,23 @@ class App extends Component {
         return (
           <div className="chat-app">
             <div className="header-container">
-            <h1 className="header" onClick={this.backHome}>Shen's Bread</h1>
-            <p className="logged-user">Welcome {this.state.curUser.name}</p>
+              <h1 className="header" onClick={this.backHome}>Shen's Bread</h1>
+              <p className="logged-user">Welcome {this.state.curUser.name}</p>
             </div>
-            
+            {this.state.waiting ? <img alt="waiting" src={spinner} className="spinner"/> :
             <div className="display-panel">
               {/* <Users users={this.state.users}/> */}
-              {this.state.waiting ? <img alt="waiting" src={spinner} className="spinner"/> :
+              
                 <Messages messages={this.state.messages} click={this.myClick}  />
-              }
-            </div>
-            <button onClick={this.handleOutGoing}>Share Your Cusine Today!</button>
+                <button onClick={this.handleOutGoing}>Share Your Cusine Today!</button>
             <Logout send={this.outUser} curUser={this.state.curUser} />
+            </div>
+            }
+            
+            
             <ErrorMessage error = {this.state.error}/>
           </div>
+            
         );
       } 
       else if (this.state.pop) {
