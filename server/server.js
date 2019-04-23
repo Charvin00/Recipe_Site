@@ -66,7 +66,6 @@ app.post('/fetch-recipe', express.json(), (req, res) => {
   else {
     console.log(rcpId)
     const curRecipe = recipes[rcpId]
-    console.log(curRecipe.text)
 
     // set time out to let spinner loading 3 sec
     setTimeout(() => {
