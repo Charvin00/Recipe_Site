@@ -9,12 +9,12 @@ Shen Wang
 
 ## Description
 
-React for Front End
-Express for Back End
-Grid styling with responsive design
-Add relative time stamp
-Styling with fantasy typography 
-Live users as drop down list
+React for Front End<br>
+Express for Back End<br>
+Grid styling with responsive design<br>
+Add relative time stamp<br>
+Styling with fantasy typography <br>
+Live users as drop down list<br>
 
 ## Video Demo
 
