@@ -261,11 +261,20 @@ class App extends Component {
         // if selected pop:
         return (
           <div className="chat-app">
-            <div className="header-container">
+          <div className="header-container">
               <div className="logo">
-                <div className="home header" onClick={this.backHome}>
+                <div className="home header" href="" onClick={this.backHome}>
                   <img alt="logo" src={Logo} />
                 </div>
+              </div>
+              {/* mobile version of welcome bar */}
+              <div className="mobile-version">
+                <p className="logged-user">Welcome {this.state.curUser.name}</p>
+              </div>
+              {/* desktop version of welcome bar, display live user in drop down */}
+              <div className="dropdown">
+                <p className="logged-user dropbtn">Welcome {this.state.curUser.name}</p>
+                <Users users={this.state.usersShow}/>
               </div>
             </div>
             <div className="display-panel">
@@ -280,12 +289,21 @@ class App extends Component {
         return (
           <div className="chat-app">
             <div className="header-container">
-              <div className="logo">
-                <div className="home header" onClick={this.backHome}>
-                  <img alt="logo" src={Logo} />
+                <div className="logo">
+                  <div className="home header" href="" onClick={this.backHome}>
+                    <img alt="logo" src={Logo} />
+                  </div>
+                </div>
+                {/* mobile version of welcome bar */}
+                <div className="mobile-version">
+                  <p className="logged-user">Welcome {this.state.curUser.name}</p>
+                </div>
+                {/* desktop version of welcome bar, display live user in drop down */}
+                <div className="dropdown">
+                  <p className="logged-user dropbtn">Welcome {this.state.curUser.name}</p>
+                  <Users users={this.state.usersShow}/>
                 </div>
               </div>
-            </div>
             <div className="display-panel">
               <Outgoing send={this.sendRecipe} click={this.backHome} curUser={this.state.curUser.name} />
             </div>
