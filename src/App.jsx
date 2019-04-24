@@ -316,7 +316,7 @@ class App extends Component {
     }
     // if not logged in: 
     else {
-      //go to login page
+      //go to login page 
       return (
         <div className="login">
           <Login send={this.logUser} />
