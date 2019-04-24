@@ -21,8 +21,7 @@ Live users as drop down list
 coming soon...
 
 
-================To run it on your end ======================
-
+## To run it on your end
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
