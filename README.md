@@ -1,3 +1,27 @@
+
+# Panera Soup (Recipe Sharing Site)
+
+An single page web application allow multiple users to share and browse recipes from each other
+
+## Author
+
+Shen Wang
+
+## Description
+
+React for Front End
+Express for Back End
+Grid styling with responsive design
+Add relative time stamp
+Styling with fantasy typography 
+
+## Video Demo
+
+
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
