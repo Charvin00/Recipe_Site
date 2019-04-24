@@ -59,7 +59,6 @@ app.post('/post-recipe', express.json(), (req, res) => {
 app.post('/fetch-recipe', express.json(), (req, res) => {
   let rcpId = req.body.recipeId;
   rcpId = parseInt(rcpId, 10)
-
   if (rcpId === null) {
     res.status(400).json({ error: `text' property are required` });
   }
@@ -71,7 +70,6 @@ app.post('/fetch-recipe', express.json(), (req, res) => {
     setTimeout(() => {
       res.json({ curRecipe })
     }, 3000);
-    // res.json({curMessage})
   }
 
 });
@@ -94,7 +92,6 @@ app.post('/post-user', express.json(), (req, res) => {
     isLoggedIn = true;
     res.json({ user, isLoggedIn })
   }
-
 });
 
 //delete user
@@ -108,11 +105,9 @@ app.post('/delete-user', express.json(), (req, res) => {
     // already exist, or new user, response logged in to be true
     // new user log in, add to users list; 
     delete users[user.name];
-    // console.log(users)
     isLoggedIn = false;
     res.json({ users, isLoggedIn })
   }
-
 });
 
 

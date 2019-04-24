@@ -6,6 +6,8 @@ import Login from './Login.jsx';
 import Logout from './Logout.jsx';
 import ErrorMessage from './Error.jsx';
 import Pop from './Pop.jsx';
+import Users from './Users.jsx';
+
 import spinner from './spinner.gif';
 import Logo from './logo.png';
 import './chat.css';
@@ -15,7 +17,8 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      users: {},
+      users: {}, 
+      usersShow: {}, // online users list other than curUser
       curUser: '', //current user
       recipes: [], //recipes list:
       isLoggedIn: false,
@@ -52,6 +55,12 @@ class App extends Component {
         error: '',
         recipes: result.recipes,
         users: result.users,
+      })
+      // delete current users to show the rest users 
+      //who are online as well in the drop down list
+      delete result.users[this.state.curUser.name];
+      this.setState({
+        usersShow: result.users,
       })
     })
       //for error message:
@@ -224,7 +233,15 @@ class App extends Component {
                   <img alt="logo" src={Logo} />
                 </div>
               </div>
-              <p className="logged-user">Welcome {this.state.curUser.name}</p>
+              {/* mobile version of welcome bar */}
+              <div className="mobile-version">
+                <p className="logged-user">Welcome {this.state.curUser.name}</p>
+              </div>
+              {/* desktop version of welcome bar, display live user in drop down */}
+              <div className="dropdown">
+                <p className="logged-user dropbtn">Welcome {this.state.curUser.name}</p>
+                <Users users={this.state.usersShow}/>
+              </div>
             </div>
             {this.state.waiting ?
               <img alt="waiting" src={spinner} className="spinner" />

@@ -26,16 +26,18 @@ body {
   margin: 0 auto;
   text-align: center;
 }
+
 /*  =========welcome logged user============ */
 .logged-user {
-  margin-top: -62px;
-  margin-left: 2%;
   color: white;
   background-color: orange;
   font-weight: bolder;
-  padding: 0.5% 3%;
+  padding: 1.5% 10%;
+  cursor: pointer;
 }
-
+.mobile-version {
+  display: none;
+}
 .display-panel {
   padding-top: 96px;
 }
@@ -46,6 +48,29 @@ body {
   color: white;
   font-size: 150%;
 }
+
+/*======== drop down underneath welcome logged user=========== */
+.dropdown-content {
+  display: none;
+  z-index: 1;
+  margin: 0 auto;
+  width: fit-content;
+  padding: 0 3%;
+  border-radius: 15px;
+  border: 1px solid orange;
+  background-color: white;
+  color: orange;
+}
+
+.dropdown {
+  width: 28%;
+  margin-top: -62px;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+.dropdown:hover .dropdown-content {display: block;}
+.dropdown:hover .dropbtn {opacity: 0.8;}
+
 /* =================spinner ========== */
 .spinner { 
   width: 15%;
@@ -228,12 +253,21 @@ button:hover {
     margin-top: 50%;
   }
   .logged-user {
-    margin-top: inherit;
-    margin: auto;
+    /* margin-top: inherit;
+    margin: auto; */
     width: 90%;
     text-align: center;
+    padding: 0.5% 3%
+  }
+  .mobile-version {
+    display: block;
+    width: 90%;
+    margin: 0 auto;
   }
 
+  .dropdown {
+    display: none; 
+  }
   .display-panel {
     padding-top: 20%;
   }
