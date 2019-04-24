@@ -14,13 +14,14 @@ Express for Back End
 Grid styling with responsive design
 Add relative time stamp
 Styling with fantasy typography 
+Live users as drop down list
 
 ## Video Demo
 
+coming soon...
 
 
-
-
+================To run it on your end ======================
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
